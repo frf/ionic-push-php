@@ -12,7 +12,7 @@ use GuzzleHttp\Psr7\Request;
 /**
  * Class PushProcessor
  *
- * @package Dmitrovskiy\IonicPush
+ * @package Fabiorf\IonicPush
  */
 class PushProcessor
 {

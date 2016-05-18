@@ -1,6 +1,6 @@
 <?php
 
-namespace Dmitrovskiy\IonicPush\Exception;
+namespace Fabiorf\IonicPush\Exception;
 
 /**
  * Class RequestException
