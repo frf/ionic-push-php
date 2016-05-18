@@ -19,11 +19,17 @@ class PushProcessor
     /** @var string */
     protected $appId;
 
-    /** @var string */
-    protected $appApiSecret;
+    /** @var string Description:  API Tokens */
+    protected $apiToken;
 
     /** @var string */
     protected $ionicPushEndPoint;
+
+    /** @var string Default: fake_push_profile you create in ionic.io Cirtificates*/
+    /*
+     * @TODO Create certificates in ionic.io fake_push_profile or other name and set in construct method
+     */
+    protected $appProfile;
 
     /**
      * @param string $appId
@@ -32,11 +38,13 @@ class PushProcessor
      */
     public function __construct(
         $appId,
-        $appApiSecret,
-        $ionicPushEndPoint = 'https://push.ionic.io/api/v1/push'
+        $apiToken,
+        $appProfile = 'fake_push_profile',
+        $ionicPushEndPoint = 'https://api.ionic.io/push/notifications'
     ) {
         $this->appId = $appId;
-        $this->appApiSecret = $appApiSecret;
+        $this->apiToken = $apiToken;
+        $this->appProfile = $appProfile;
         $this->ionicPushEndPoint = $ionicPushEndPoint;
     }
 
@@ -45,10 +53,17 @@ class PushProcessor
         return $this->appId;
     }
 
-    public function getAppApiSecret()
+    protected function getAppApiToken()
     {
-        return $this->appApiSecret;
+        return $this->apiToken;
     }
+
+    public function getAppApiProfile()
+    {
+        return $this->appProfile;
+    }
+
+
 
     public function getPushEndPoint()
     {
@@ -68,16 +83,17 @@ class PushProcessor
      */
     public function notify(array $devices, array $notification)
     {
-        $headers = $this->getNotificationHeaders();
-        $body = $this->getNotificationBody($devices, $notification);
+        $headers   = $this->getNotificationHeaders();
+        $profile   = $this->getAppApiProfile();
+        $body      = $this->getNotificationBody($devices,$profile,$notification);
 
         return $this->sendRequest($headers, $body);
     }
 
     protected function getNotificationHeaders()
     {
-        $encodedApiSecret = $this->getEncodedApiSecret();
-        $authorization = sprintf("Basic %s", $encodedApiSecret);
+        $appToken = $this->getAppApiToken();
+        $authorization = sprintf("Bearer %s", $appToken);
 
         return array(
             'Authorization'          => $authorization,
@@ -92,11 +108,12 @@ class PushProcessor
      *
      * @return string
      */
-    protected function getNotificationBody(array $devices, array $notification)
+    protected function getNotificationBody(array $devices, $profile, array $notification)
     {
         $body = array(
-            'tokens'       => $devices,
-            'notification' => $notification
+            'tokens'        => $devices,
+            'profile'       => $profile,
+            'notification'  => $notification
         );
 
         return json_encode($body);
@@ -146,10 +163,5 @@ class PushProcessor
         }
 
         return null;
-    }
-
-    protected function getEncodedApiSecret()
-    {
-        return base64_encode($this->appApiSecret . ':');
     }
 }
