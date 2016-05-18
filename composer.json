@@ -1,18 +1,18 @@
 {
-  "name": "dmitrovskiy/ionic-push-php",
-  "description": "ionic push notifications php sdk",
+  "name": "fabiorf/ionic-push-php",
+  "description": "ionic push notifications php sdk v2",
   "keywords": [
     "ionic",
     "push",
     "notifications"
   ],
-  "homepage": "https://github.com/dmitrovskiy/ionic-push-php",
+  "homepage": "https://github.com/frf/ionic-push-php",
   "license": "MIT",
   "authors": [
     {
-      "name": "Vladimir Dmitrovskiy",
-      "email": "dmitrovskiyvl@gmail.com",
-      "homepage": "https://github.com/dmitrovskiy",
+      "name": "Fabio Rocha",
+      "email": "fabio@fabiofarias.com.br",
+      "homepage": "https://github.com/fabiorf",
       "role": "Developer"
     }
   ],
@@ -25,12 +25,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Dmitrovskiy\\IonicPush\\": "src"
+      "Fabiorf\\IonicPush\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Dmitrovskiy\\IonicPush\\Tests\\": "tests"
+      "Fabiorf\\IonicPush\\Tests\\": "tests"
     }
   }
 }

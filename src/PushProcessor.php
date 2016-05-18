@@ -1,10 +1,10 @@
 <?php
 
-namespace Dmitrovskiy\IonicPush;
+namespace Fabiorf\IonicPush;
 
-use Dmitrovskiy\IonicPush\Exception\BadRequestException;
-use Dmitrovskiy\IonicPush\Exception\PermissionDeniedException;
-use Dmitrovskiy\IonicPush\Exception\RequestException;
+use Fabiorf\IonicPush\Exception\BadRequestException;
+use Fabiorf\IonicPush\Exception\PermissionDeniedException;
+use Fabiorf\IonicPush\Exception\RequestException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Request;
